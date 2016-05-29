@@ -6,65 +6,47 @@ public class Transponder {
     int counterTruck;
     int counterBus;
     int counterCar;
-    int totalCount;
-    double totalSum;
 
     public Transponder(double priceTruck, double priceBus, double priceCar) {
-
-        this.priceBus = priceBus;
         this.priceTruck = priceTruck;
+        this.priceBus = priceBus;
         this.priceCar = priceCar;
+
     }
 
-    public double truck() {
-        return counterTruck = counterTruck + 1;
+    public void truck() {
+        counterTruck ++;
     }
 
-    public double bus() {
-        return counterBus = counterBus + 1;
+    public void bus() {
+        counterBus ++;
     }
 
-    public double car() {
-       return counterCar = counterCar + 1;
+    public void car() {
+        counterCar ++;
     }
 
-    public double getTotalCount(int counterBus, int counterTruck, int counterCar) {
+    public int getTruckCount() {
+        return counterTruck;
+    }
 
-        totalCount = counterBus + counterTruck + counterCar;
-        return totalCount;
+    public int getBusCount() {
+        return counterBus;
     }
 
     public double getTotalSum() {
-        totalSum = (counterBus + counterTruck + counterCar) * (priceTruck + priceBus + priceCar);
-        return totalSum;
+        return (counterTruck * priceTruck) + (counterBus * priceBus)+ (counterCar * priceCar);
     }
+    public int getTotalCount() {
+        return counterTruck + counterBus + counterCar;
+    }
+
+
 
     public static void main(String[] args) {
 
-        Transponder transponder = new Transponder(10, 5.7, 3);
 
-        transponder.truck();
-        transponder.truck();
-        transponder.truck();
-        System.out.println(transponder.counterTruck);
 
-        transponder.bus();
-        transponder.bus();
-        System.out.println(transponder.counterBus);
-
-        transponder.car();
-        transponder.car();
-        transponder.car();
-        transponder.car();
-        transponder.car();
-        transponder.car();
-        System.out.println(transponder.counterCar);
-
-        transponder.getTotalCount(transponder.counterTruck, transponder.counterBus, transponder.counterCar);
-        System.out.println(transponder.totalCount);
-
-        transponder.getTotalSum();
-        System.out.println(transponder.totalSum);
     }
 
 }
