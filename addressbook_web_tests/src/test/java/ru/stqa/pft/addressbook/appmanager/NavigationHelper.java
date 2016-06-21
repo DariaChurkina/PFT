@@ -24,8 +24,7 @@ public class NavigationHelper extends HelperBase {
 
     public void goToAddNewPage() {
         if (isElementPresent(By.id("maintable"))) {
-            return;
+            click(By.linkText("add new"));
         }
-        click(By.linkText("add new"));
     }
 }
