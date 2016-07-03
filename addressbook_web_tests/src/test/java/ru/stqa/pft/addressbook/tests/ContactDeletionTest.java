@@ -15,7 +15,7 @@ public class ContactDeletionTest extends TestBase {
             app.getContactHelper().createContact(new ContactData("Daria", "Churkina", "123", "daria.churkina@inbox.ru", "Test1"));
             app.goToHomePage();
         }
-        app.getContactHelper().selectContact();
+        app.getContactHelper().selectContact(before - 1);
         app.getContactHelper().deleteSelectedContact();
         app.getAccept(); //Как бороться с незаписывающимися действиями для диалогового окна
         app.goToHomePage();
