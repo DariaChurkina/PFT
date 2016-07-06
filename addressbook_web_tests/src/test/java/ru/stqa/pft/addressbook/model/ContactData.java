@@ -1,19 +1,24 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
-    private final String id;
+
+    private int id;
     private final String firstname;
     private final String lastname;
     private final String phone;
     private final String email;
     private String group;
 
-    public String getId() {
-        return id;
+    public ContactData(String firstname, String lastname, String phone, String email, String group) {
+        this.id = 0;
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.phone = phone;
+        this.email = email;
+        this.group = group;
     }
 
-
-    public ContactData(String id, String firstname, String lastname, String phone, String email, String group) {
+    public ContactData(int id, String firstname, String lastname, String phone, String email, String group) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
@@ -22,13 +27,8 @@ public class ContactData {
         this.group = group;
     }
 
-    public ContactData(String firstname, String lastname, String phone, String email, String group) {
-        this.id = null;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.phone = phone;
-        this.email = email;
-        this.group = group;
+    public int getId() {
+        return id;
     }
 
     public String getFirstname() {
@@ -58,7 +58,7 @@ public class ContactData {
 
         ContactData that = (ContactData) o;
 
-        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (id != that.id) return false;
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
         return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
 
@@ -66,7 +66,7 @@ public class ContactData {
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
+        int result = id;
         result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         return result;
@@ -79,5 +79,9 @@ public class ContactData {
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
                 '}';
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
