@@ -11,9 +11,6 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Daria on 06.06.2016.
- */
 public class ContactHelper extends HelperBase {
 
     public ContactHelper(FirefoxDriver wd) {
@@ -53,7 +50,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public void initContactModification(int index) {
-        click(By.xpath("//table[@id='maintable']/tbody/tr["+(index+2)+"]/td[8]/a/img"));
+        click(By.xpath("//table[@id='maintable']/tbody/tr[" + (index + 2) + "]/td[8]/a/img"));
 
     }
 
@@ -71,7 +68,7 @@ public class ContactHelper extends HelperBase {
     }
 
     public int getContactCount() {
-       return wd.findElements(By.name("selected[]")).size();
+        return wd.findElements(By.name("selected[]")).size();
     }
 
     public List<ContactData> getContactList() {
