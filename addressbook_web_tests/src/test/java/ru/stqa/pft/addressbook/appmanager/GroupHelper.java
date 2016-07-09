@@ -8,9 +8,6 @@ import ru.stqa.pft.addressbook.model.GroupData;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Daria on 06.06.2016.
- */
 public class GroupHelper extends HelperBase {
 
     public GroupHelper(WebDriver wd) {
@@ -60,6 +57,13 @@ public class GroupHelper extends HelperBase {
         returntoGroupPage();
     }
 
+    public void modifyGroup(int index, GroupData group) {
+        selectGroup(index);
+        initGroupModification();
+        fillGroupForm(group);
+        submitGroupModification();
+        returntoGroupPage();
+    }
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
     }
