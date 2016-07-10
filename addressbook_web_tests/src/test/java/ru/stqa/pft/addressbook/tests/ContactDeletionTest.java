@@ -13,25 +13,22 @@ public class ContactDeletionTest extends TestBase {
     public void ensurePreconditions() {
         app.goToHomePage();
 
-        if (!app.getContactHelper().isThereAContact()) {
-            app.goTo().goToAddNewPage();
-            app.getContactHelper().createContact(new ContactData("Daria", "Churkina", "123", "daria.churkina@inbox.ru", "Test1"));
+        if (app.contact().list().size() == 0) {
+            app.goTo().addNewPage();
+            app.contact().createContact(new ContactData("Daria", "Churkina", "123", "daria.churkina@inbox.ru", "Test1"));
             app.goToHomePage();
         }
     }
 
     @Test
     public void testContactDeletion() {
-        List<ContactData> before = app.getContactHelper().getContactList();
-        app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().deleteSelectedContact();
-        app.getAccept(); //Как бороться с незаписывающимися действиями для диалогового окна
-        app.goToHomePage();
-        List<ContactData> after = app.getContactHelper().getContactList();
+        List<ContactData> before = app.contact().list();
+        int index = before.size() - 1;
+        app.contact().delete(index);
+        List<ContactData> after = app.contact().list();
         Assert.assertEquals(after.size(), before.size() - 1);
 
-        before.remove(before.size() - 1);
+        before.remove(index);
         Assert.assertEquals(before, after);
     }
-
 }

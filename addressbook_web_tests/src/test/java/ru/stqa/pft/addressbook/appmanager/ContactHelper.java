@@ -57,12 +57,16 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form[1]/input[22]"));
     }
 
-    public boolean isThereAContact() {
+    public boolean findContact() {
         return isElementPresent(By.name("selected[]"));
     }
 
     public void goToHomePage() {
         wd.findElement(By.linkText("home")).click();
+    }
+
+    public void getAccept() {
+        wd.switchTo().alert().accept();
     }
 
     public void createContact(ContactData contact) {
@@ -74,7 +78,7 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
-    public List<ContactData> getContactList() {
+    public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements) {
@@ -87,11 +91,24 @@ public class ContactHelper extends HelperBase {
         return contacts;
     }
 
-        public void modifyContact(int index, ContactData contact) {
+    public void modify(int index, ContactData contact) {
         selectContact(index);
         initContactModification(index);
         fillContactData(contact, false);
         submitContactModification();
+        goToHomePage();
+    }
+
+    public void delete(int index) {
+        selectContact(index);
+        deleteSelectedContact();
+        getAccept(); //Как бороться с незаписывающимися действиями для диалогового окна
+        goToHomePage();
+    }
+
+    public void submit(ContactData contact) {
+        fillContactData(contact, true);
+        submitNewContact();
         goToHomePage();
     }
 }
