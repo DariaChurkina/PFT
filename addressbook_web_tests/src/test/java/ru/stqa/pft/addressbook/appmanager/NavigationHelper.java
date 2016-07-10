@@ -22,7 +22,7 @@ public class NavigationHelper extends HelperBase {
         click(By.linkText("groups"));
     }
 
-    public void goToAddNewPage() {
+    public void addNewPage() {
         if (isElementPresent(By.id("maintable"))) {
             click(By.linkText("add new"));
         }
