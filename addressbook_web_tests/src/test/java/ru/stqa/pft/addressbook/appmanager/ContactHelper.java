@@ -44,7 +44,7 @@ public class ContactHelper extends HelperBase {
         click(By.xpath("//div[@id='content']/form[2]/div[2]/input"));
     }
 
-    public void selectContact(int index) {
+    public void selectContactById(int index) {
         By Elements = By.name("selected[]");
         wd.findElements(Elements).get(index).click();
     }
@@ -90,16 +90,16 @@ public class ContactHelper extends HelperBase {
         return contacts;
     }
 
-    public void modify(int index, ContactData contact) {
-        selectContact(index);
-        initContactModification(index);
+    public void modify(ContactData contact) {
+        selectContactById(contact.getId());
+        initContactModification(contact.getId());
         fillContactData(contact, false);
         submitContactModification();
         goToHomePage();
     }
 
     public void delete(int index) {
-        selectContact(index);
+        selectContactById(index);
         deleteSelectedContact();
         getAccept(); //Как бороться с незаписывающимися действиями для диалогового окна
         goToHomePage();
