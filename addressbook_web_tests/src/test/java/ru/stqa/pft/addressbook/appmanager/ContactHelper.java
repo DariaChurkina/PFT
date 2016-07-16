@@ -9,7 +9,9 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends HelperBase {
 
@@ -86,6 +88,19 @@ public class ContactHelper extends HelperBase {
         return wd.findElements(By.name("selected[]")).size();
     }
 
+    public void delete(int index) {
+        selectContactById(index);
+        deleteSelectedContact();
+        getAccept(); //Как бороться с незаписывающимися действиями для диалогового окна
+        goToHomePage();
+    }
+
+    public void submit(ContactData contact) {
+        fillContactData(contact, true);
+        submitNewContact();
+        goToHomePage();
+    }
+
     public List<ContactData> list() {
         List<ContactData> contacts = new ArrayList<ContactData>();
         List<WebElement> elements = wd.findElements(By.name("entry"));
@@ -98,16 +113,15 @@ public class ContactHelper extends HelperBase {
         return contacts;
     }
 
-    public void delete(int index) {
-        selectContactById(index);
-        deleteSelectedContact();
-        getAccept(); //Как бороться с незаписывающимися действиями для диалогового окна
-        goToHomePage();
-    }
-
-    public void submit(ContactData contact) {
-        fillContactData(contact, true);
-        submitNewContact();
-        goToHomePage();
+    public Set<ContactData> all() {
+        Set<ContactData> contacts = new HashSet<ContactData>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+        for (WebElement element : elements) {
+            String firstName = element.findElement(By.xpath("td[3]")).getText();
+            String lastName = element.findElement(By.xpath("td[2]")).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            contacts.add(new ContactData().withId(id).withFirstname(firstName).withLastname(lastName));
+        }
+        return contacts;
     }
 }
