@@ -69,9 +69,17 @@ public class ContactHelper extends HelperBase {
         wd.switchTo().alert().accept();
     }
 
-    public void createContact(ContactData contact) {
+    public void create(ContactData contact) {
         fillContactData(contact, true);
         submitNewContact();
+    }
+
+    public void modify(int index, ContactData contact) {
+        selectContactById(index);
+        initContactModification(index);
+        fillContactData(contact, false);
+        submitContactModification();
+        goToHomePage();
     }
 
     public int getContactCount() {
@@ -88,14 +96,6 @@ public class ContactHelper extends HelperBase {
             contacts.add(new ContactData().withId(id).withFirstname(firstName).withLastname(lastName));
         }
         return contacts;
-    }
-
-    public void modify(ContactData contact) {
-        selectContactById(contact.getId());
-        initContactModification(contact.getId());
-        fillContactData(contact, false);
-        submitContactModification();
-        goToHomePage();
     }
 
     public void delete(int index) {
