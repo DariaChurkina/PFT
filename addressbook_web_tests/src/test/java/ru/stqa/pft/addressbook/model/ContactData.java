@@ -82,10 +82,9 @@ public class ContactData {
     @Override
     public String toString() {
         return "ContactData{" +
-                "id='" + id + '\'' +
-
+                "lastname='" + lastname + '\'' +
                 ", firstname='" + firstname + '\'' +
-                ", lastname='" + lastname + '\'' +
+                ", id=" + id +
                 '}';
     }
 
