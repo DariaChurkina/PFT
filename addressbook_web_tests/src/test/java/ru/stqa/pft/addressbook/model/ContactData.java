@@ -16,6 +16,7 @@ public class ContactData {
     private String allPhones;
     private String allEmails;
     private String address;
+    private String contactDetails;
 
 
     public int getId() {
@@ -72,6 +73,11 @@ public class ContactData {
 
     public String getAddress() {
         return address;
+    }
+
+    public String getContactDetails() {
+
+        return contactDetails;
     }
 
 
@@ -173,4 +179,8 @@ public class ContactData {
         return this;
     }
 
+    public ContactData withContactDetails(String contactDetails) {
+        this.contactDetails = contactDetails;
+        return this;
+    }
 }

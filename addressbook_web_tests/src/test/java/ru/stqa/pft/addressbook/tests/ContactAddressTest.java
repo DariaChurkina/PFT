@@ -28,4 +28,3 @@ public class ContactAddressTest extends TestBase {
             assertThat(contact.getAddress(), equalTo(contactInfoFromEditForm.getAddress()));
         }
 }
-

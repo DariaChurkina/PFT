@@ -4,9 +4,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import java.util.Arrays;
 import java.util.stream.Collectors;
 
+import static java.util.Arrays.asList;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -30,7 +30,9 @@ public class CheckWholeContactTest extends TestBase{
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromDetailsPage = app.contact().infoFromDetailsPage(contact);
         ContactData contactInfoFromEditPage = app.contact().infoFromEditForm(contact);
-        assertThat(cleaned(mergeContactDetails(contactInfoFromEditPage)), equalTo(contactInfoFromDetailsPage.getContactDetails()));
+        String editPageInfo = cleaned(mergeContactDetails(contactInfoFromEditPage));
+        String detailsPageInfo = contactInfoFromDetailsPage.getContactDetails();
+        assertThat((editPageInfo), equalTo(detailsPageInfo));
     }
 
 
@@ -47,12 +49,12 @@ public class CheckWholeContactTest extends TestBase{
         if (!contact.getWorkPhone().equals("")){
             work = "W: " + contact.getWorkPhone();
         }
-        return  Arrays.asList(contact.getFirstname() + " " + contact.getLastname(), contact.getAddress() + "\n", homePhone,
-                mobile, work,  "\n" + contact.getEmail()).stream().filter((s) -> !s.equals(""))
+        return  asList(contact.getFirstname() + " " + contact.getLastname(), contact.getAddress() + "\n", homePhone,
+                mobile, work + "\n", contact.getEmail(), contact.getEmail2(), contact.getEmail3()).stream().filter((s) -> !s.equals(""))
                 .collect(Collectors.joining("\n"));
     }
 
     public static String cleaned(String details){
-        return details.replace("www.inbox.ru", "");
+        return details.replace("", "");
     }
 }
