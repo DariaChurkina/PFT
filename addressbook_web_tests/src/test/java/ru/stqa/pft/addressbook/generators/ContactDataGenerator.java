@@ -18,7 +18,7 @@ public class ContactDataGenerator {
     public int count;
 
     @Parameter(names = "-f", description = "Target file")
-    public String file2;
+    public String file;
 
     public static void main(String[] args) throws IOException {
         ContactDataGenerator generator = new ContactDataGenerator();
@@ -34,15 +34,14 @@ public class ContactDataGenerator {
 
     private void run() throws IOException {
         List<ContactData> contacts = generateContacts(count);
-        save(contacts, new File(file2));
+        save(contacts, new File(file));
     }
 
-    private static void save(List<ContactData> contacts, File file2) throws IOException {
-        Writer writer = new FileWriter(file2);
+    private static void save(List<ContactData> contacts, File file) throws IOException {
+        Writer writer = new FileWriter(file);
         for (ContactData contact : contacts) {
-            writer.write(String.format("%s;%s;%s;%s;%s;%s;%s;%s;%s\n", contact.getFirstname(), contact.getLastname(),
-                    contact.getHomePhone(), contact.getMobilePhone(), contact.getWorkPhone(), contact.getEmail(), contact.getEmail2(),
-                    contact.getEmail3(), contact.getAddress()));
+            writer.write(String.format("%s;%s;%s;%s;%s;%s\n", contact.getFirstname(), contact.getLastname(),
+                    contact.getHomePhone(), contact.getEmail(), contact.getAddress(), contact.getPhoto()));
         }
         writer.close();
     }
