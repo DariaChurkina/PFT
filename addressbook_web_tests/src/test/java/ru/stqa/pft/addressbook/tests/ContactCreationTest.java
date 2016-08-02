@@ -22,7 +22,7 @@ public class ContactCreationTest extends TestBase {
     @DataProvider
     public Iterator<Object[]> validContacts() throws IOException {
         File photo = new File("src/test/resources/helena.jpg");
-        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.csv")));
+        BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.xml")));
         String xml = "";
         String line = reader.readLine();
         while (line != null) {
